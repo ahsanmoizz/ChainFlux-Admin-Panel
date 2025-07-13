@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+import AdminDashboard from "./admin/AdminDashboard";
+import PlanManager from "./admin/PlanManager";
+import EmergencyToggle from "./admin/EmergencyToggle";
+
+import AdminUserList from "./admin/AdminUserList";
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="flex min-h-screen bg-gray-100">
+        {/* Main content */}
+        <main className="flex-1 p-6 overflow-y-auto">
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
+            <Route path="/plans" element={<PlanManager />} />
+            <Route path="/list" element={<AdminUserList />} />
+            <Route path="/emergency" element={<EmergencyToggle />} />
+            <Route path="*" element={<div>Page Not Found</div>} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
-
-export default App;
